@@ -1,0 +1,11 @@
+NAME="Nixel OS"
+PRETTY_NAME="Nixel OS"
+ID=nixel
+ID_LIKE=arch
+BUILD_ID=rolling
+ANSI_COLOR="38;2;155;109;255"
+HOME_URL="https://github.com/Azure-6-lgtm"
+DOCUMENTATION_URL="https://github.com/Azure-6-lgtm"
+SUPPORT_URL="https://github.com/Azure-6-lgtm"
+BUG_REPORT_URL="https://github.com/Azure-6-lgtm"
+LOGO=nixel-logo
