@@ -1,0 +1,12 @@
+[Unit]
+Description=Nixel OS live user setup
+After=local-fs.target
+Before=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/nixel-live-user-setup
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
