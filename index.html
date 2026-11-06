@@ -374,7 +374,7 @@
                         <!-- Terminal Screen -->
                         <div id="terminalScreen" class="p-5 h-[320px] overflow-y-auto space-y-3 text-slate-300 scroll-smooth">
                             <div>
-                                <p class="text-nixel-purple font-semibold">Welcome to Nixel OS Web Terminal v2026.04</p>
+                                <p class="text-nixel-purple font-semibold">Welcome to Nixel OS Web Terminal v2027.01</p>
                                 <p class="text-slate-500">Type <span class="text-white">`help`</span> or click quick buttons to get started.</p>
                             </div>
                         </div>
@@ -496,7 +496,7 @@
             <div class="mt-12 max-w-5xl mx-auto">
                 <p class="text-xs font-mono text-slate-400 mb-2">Verify ISO image integrity in your terminal:</p>
                 <div class="bg-nixel-card border border-nixel-border rounded-xl p-4 font-mono text-xs text-slate-300 flex items-center justify-between">
-                    <code>sha256sum -c nixel-linux-2026.04-x86_64.iso.sha256</code>
+                    <code>sha256sum -c nixel-linux-2027.01-x86_64.iso.sha256</code>
                     <button onclick="copyHash('sha256sum -c nixel-linux-2026.04-x86_64.iso.sha256')" class="text-nixel-purple hover:underline text-xs">Copy Command</button>
                 </div>
             </div>
@@ -550,10 +550,10 @@
             <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
                 <div class="flex items-center gap-3">
                     <span class="font-display font-bold text-sm text-white">Nixel Linux</span>
-                    <span>&copy; 2026. Not affiliated with Arch Linux or Apple Inc.</span>
+                    <span>&copy; 2026. Not affiliated with Arch Linux .</span>
                 </div>
                 <div class="flex items-center gap-6 text-slate-400">
-                    <a href="https://github.com" class="hover:text-nixel-purple transition-colors">GitHub</a>
+                    <a href="https://github.com/Azure-6-lgtm/Nixel-Linux/" class="hover:text-nixel-purple transition-colors">GitHub</a>
                     <a href="#" class="hover:text-nixel-purple transition-colors">Docs</a>
                     <a href="#" class="hover:text-nixel-purple transition-colors">Contact</a>
                 </div>
@@ -629,7 +629,7 @@
         function clearTerminal() {
             terminalScreen.innerHTML = `
                 <div>
-                    <p class="text-nixel-purple font-semibold">Welcome to Nixel OS Web Terminal v2026.04</p>
+                    <p class="text-nixel-purple font-semibold">Welcome to Nixel OS Web Terminal v2027.01</p>
                     <p class="text-slate-500">Type <span class="text-white">\`help\`</span> or click quick buttons to get started.</p>
                 </div>
             `;
@@ -686,9 +686,9 @@
                     break;
                 case 'nixel-info':
                     output = `
-                        <p class="text-nixel-purple font-semibold">Nixel Linux 2026.04 (Rolling Release)</p>
+                        <p class="text-nixel-purple font-semibold">Nixel Linux 2027.01 (Rolling Release)</p>
                         <p>Architecture: Arch-based Minimalist Core</p>
-                        <p>Installer: Calamares GUI & Custom CLI</p>
+                        <p>Installer: Angel</p>
                         <p>Default File System: Btrfs (With Snapper backups)</p>
                     `;
                     break;
