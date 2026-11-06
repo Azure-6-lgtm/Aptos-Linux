@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eu
+
+if ! id nixel &>/dev/null; then
+    useradd --create-home --user-group --shell /bin/bash --groups wheel nixel
+fi
+
+usermod -aG wheel nixel
+
+install -d -o nixel -g nixel /home/nixel
