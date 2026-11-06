@@ -1,157 +1,712 @@
-<!doctype html>
-<!--YOU KNOW ITS NOT VIBECODED WHEN I FUCK GAY GUYS--!>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aptos-Linux</title>
-  <meta name="description" content="Aptos-Linux is a minimal, Arch-based Linux distribution aimed at beginners, with a clean macOS-inspired interface. Currently in development.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nixel Linux - Minimal, Bleeding-Edge Arch-Based Distro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nixel: {
+                            bg: '#08080a',
+                            card: '#111218',
+                            border: '#232533',
+                            purple: '#a855f7',
+                            purpleDark: '#7e22ce',
+                            purpleGlow: '#c084fc',
+                            accent: '#9333ea',
+                            textMuted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.18) 0%, rgba(8, 8, 10, 0) 70%)',
+                        'grid-pattern': 'linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Glowing & Pixel Motifs */
+        .glow-box {
+            box-shadow: 0 0 30px -5px rgba(168, 85, 247, 0.25);
+        }
+        .glow-text {
+            text-shadow: 0 0 14px rgba(168, 85, 247, 0.6);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08080a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232533;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-nixel-bg text-slate-100 font-sans antialiased selection:bg-nixel-purple selection:text-white relative min-h-screen overflow-x-hidden">
 
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="#top">
-        <img src="favicon.svg" alt="">
-        Aptos-Linux
-      </a>
-      <nav class="nav" aria-label="Main">
-        <a href="#about">About</a>
-        <a href="#download">Download</a>
-        <a href="#get-involved">Get involved</a>
-        <a href="#">Docs</a>
-        <a href="#">GitHub</a>
-      </nav>
-    </div>
-  </header>
+    <!-- Background Layer Effects -->
+    <div class="fixed inset-0 bg-grid-pattern bg-[size:32px_32px] opacity-40 pointer-events-none z-0"></div>
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[480px] bg-hero-glow pointer-events-none z-0"></div>
 
-  <main id="top">
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-nixel-bg/80 border-b border-nixel-border/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 bg-gradient-to-br from-nixel-card to-black rounded-xl p-2 border border-nixel-purple/40 group-hover:border-nixel-purple flex items-center justify-center transition-all duration-300 shadow-lg shadow-nixel-purple/10">
+                    <!-- SVG N Pixel Icon -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full text-white" fill="none">
+                        <rect x="15" y="15" width="16" height="14" rx="4" fill="white" />
+                        <rect x="15" y="33" width="16" height="14" rx="4" fill="white" />
+                        <rect x="15" y="51" width="16" height="14" rx="4" fill="white" />
+                        <rect x="15" y="69" width="16" height="14" rx="4" fill="white" />
+                        
+                        <rect x="37" y="33" width="14" height="14" rx="4" fill="#a855f7" class="animate-pulse" />
+                        <rect x="53" y="51" width="14" height="14" rx="4" fill="#a855f7" />
+                        
+                        <rect x="69" y="15" width="16" height="14" rx="4" fill="white" />
+                        <rect x="69" y="33" width="16" height="14" rx="4" fill="white" />
+                        <rect x="69" y="51" width="16" height="14" rx="4" fill="white" />
+                        <rect x="69" y="69" width="16" height="14" rx="4" fill="white" />
+                    </svg>
+                </div>
+                <div class="font-display text-2xl font-bold tracking-tight">
+                    <span class="text-white">Nixel</span><span class="text-nixel-purple glow-text">Linux</span>
+                </div>
+            </a>
 
-    <div class="wrap">
-      <div class="hero">
-        <h1>Linux, made simple.</h1>
-        <p class="tagline">
-          Aptos-Linux is a minimal, Arch-based distribution that aims to be easy for
-          beginners, with a clean, macOS-inspired desktop.
-        </p>
-        <div class="buttons">
-          <a class="btn primary" href="#download">Download</a>
-          <a class="btn" href="#about">Learn more</a>
-        </div>
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-nixel-purple transition-colors">About</a>
+                <a href="#features" class="hover:text-nixel-purple transition-colors">Features</a>
+                <a href="#terminal" class="hover:text-nixel-purple transition-colors">Interactive OS</a>
+                <a href="#download" class="hover:text-nixel-purple transition-colors">Downloads</a>
+                <a href="#get-involved" class="hover:text-nixel-purple transition-colors">Community</a>
+            </nav>
 
-        <div class="notice" role="note">
-          <strong>Heads up:</strong> Aptos-Linux is still in early development.
-          Things will change, break and improve. It is not ready for daily use yet.
-        </div>
-      </div>
-    </div>
+            <!-- CTA Button -->
+            <div class="flex items-center gap-4">
+                <a href="#download" class="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm text-white bg-gradient-to-r from-nixel-accent to-nixel-purple hover:opacity-90 transition-all shadow-lg shadow-nixel-purple/20 hover:shadow-nixel-purple/40 active:scale-95">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Get Nixel</span>
+                </a>
 
-    <section id="about" class="alt">
-      <div class="wrap">
-        <h2>What is Aptos-Linux?</h2>
-        <p class="section-intro">
-          We're a small group of friends building a distribution we'd want to hand
-          to someone trying Linux for the first time.
-        </p>
-
-        <div class="grid">
-          <div class="card">
-            <h3>Built on Arch</h3>
-            <p>Aptos-Linux is based on Arch Linux, giving it a solid and well-known foundation to build on.</p>
-          </div>
-          <div class="card">
-            <h3>Minimal by design</h3>
-            <p>A small base system with no pile of preinstalled extras. You add what you need.</p>
-          </div>
-          <div class="card">
-            <h3>Beginner friendly</h3>
-            <p>We want setup and everyday use to feel approachable, without needing to read a wiki first.</p>
-          </div>
-          <div class="card">
-            <h3>Clean interface</h3>
-            <p>A tidy, macOS-inspired look that stays out of your way.</p>
-          </div>
-          <div class="card">
-            <h3>Open source</h3>
-            <p>Developed in the open. Read the code, report problems and help shape it.</p>
-          </div>
-          <div class="card">
-            <h3>Work in progress</h3>
-            <p>Features and details are still being decided, and feedback now makes a real difference.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="download">
-      <div class="wrap">
-        <h2>Download</h2>
-        <p class="section-intro">
-          Development builds only. Try them in a virtual machine first.
-        </p>
-
-        <div class="download-box">
-          <div class="download-row">
-            <div>
-              <strong>PLACEHOLDER</strong>
-              <div class="meta">PLACEHOLDER</div>
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg bg-nixel-card border border-nixel-border text-slate-300">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
             </div>
-                        <a class="btn primary" href="#">Download ISO</a>
-          </div>
-          <div class="download-row">
-            <div>
-              <strong>Checksums</strong>
-              <div class="meta">Verify your download before using it</div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileNav" class="hidden md:hidden bg-nixel-card/95 border-b border-nixel-border px-6 py-4 space-y-3">
+            <a href="#about" class="block text-slate-300 hover:text-nixel-purple py-1">About</a>
+            <a href="#features" class="block text-slate-300 hover:text-nixel-purple py-1">Features</a>
+            <a href="#terminal" class="block text-slate-300 hover:text-nixel-purple py-1">Interactive OS</a>
+            <a href="#download" class="block text-slate-300 hover:text-nixel-purple py-1">Downloads</a>
+            <a href="#get-involved" class="block text-slate-300 hover:text-nixel-purple py-1">Community</a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 lg:pt-20 lg:pb-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-nixel-purple/10 border border-nixel-purple/30 text-nixel-purple text-xs sm:text-sm font-mono font-medium">
+                        <span class="w-2 h-2 rounded-full bg-nixel-purple animate-ping"></span>
+                        Nixel Linux 2026.04 Rolling Release
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl font-display font-extrabold text-white tracking-tight leading-tight">
+                        Blazing Fast. Bleeding Edge.<br>
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-nixel-purpleGlow to-nixel-purple">
+                            Rock-Solid Stability.
+                        </span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-nixel-textMuted max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Nixel is a minimal, Arch-based Linux distribution offering blazing fast speed, a bleeding-edge rolling release model, and out-of-the-box stability that makes it a perfect choice for beginners and power users alike.
+                    </p>
+
+                    <!-- Call to Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#download" class="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-white bg-nixel-accent hover:bg-nixel-purple transition-all shadow-xl shadow-nixel-purple/25 flex items-center justify-center gap-2 group">
+                            <span>Download Nixel ISO (64-bit)</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#terminal" class="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-slate-300 bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 hover:text-white transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="terminal" class="w-4 h-4 text-nixel-purple"></i>
+                            <span>Try Web Terminal</span>
+                        </a>
+                    </div>
+
+                    <!-- Micro Badge Specs -->
+                    <div class="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-400 font-mono">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="zap" class="w-4 h-4 text-nixel-purple"></i>
+                            <span>Kernel 6.12 LTS / Zen</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="cpu" class="w-4 h-4 text-nixel-purple"></i>
+                            <span>RAM &lt; 380MB Idle</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-nixel-purple"></i>
+                            <span>Btrfs Snapshots</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Fastfetch Card Preview -->
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-2xl bg-nixel-card border border-nixel-border/80 shadow-2xl overflow-hidden glow-box">
+                        <div class="bg-[#181a24] px-4 py-3 border-b border-nixel-border flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                                <i data-lucide="terminal" class="w-3.5 h-3.5 text-nixel-purple"></i> user@nixel-desktop:~
+                            </span>
+                            <div class="w-12"></div>
+                        </div>
+
+                        <!-- Fastfetch Widget Content -->
+                        <div class="p-5 font-mono text-xs sm:text-sm space-y-3 bg-[#0c0d12] text-slate-200 overflow-x-auto">
+                            <div class="flex items-center gap-2 text-slate-400">
+                                <span class="text-nixel-purple">➜</span> <span>fastfetch</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center pt-2">
+                                <div class="sm:col-span-5 font-bold leading-tight text-nixel-purple font-mono select-none">
+<pre class="text-[10px] sm:text-xs">
+███╗   ██╗██╗██╗  ██╗███████╗██╗    
+████╗  ██║██║╚██╗██╔╝██╔════╝██║    
+██╔██╗ ██║██║ ╚███╔╝ █████╗  ██║    
+██║╚██╗██║██║ ██╔██╗ ██╔══╝  ██║    
+██║ ╚████║██║██╔╝ ██╗███████╗███████╗
+╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝╚══════╝╚══════╝
+</pre>
+                                </div>
+                                
+                                <div class="sm:col-span-7 space-y-1 text-slate-300 text-xs">
+                                    <p><span class="text-nixel-purple font-bold">OS:</span> Nixel Linux x86_64</p>
+                                    <p><span class="text-nixel-purple font-bold">Host:</span> UltraBook Pro 2026</p>
+                                    <p><span class="text-nixel-purple font-bold">Kernel:</span> 6.12.8-arch1-1-nixel</p>
+                                    <p><span class="text-nixel-purple font-bold">Uptime:</span> 14 hours, 22 mins</p>
+                                    <p><span class="text-nixel-purple font-bold">Packages:</span> 612 (pacman)</p>
+                                    <p><span class="text-nixel-purple font-bold">Shell:</span> zsh 5.9 (p10k)</p>
+                                    <p><span class="text-nixel-purple font-bold">Theme:</span> Catppuccin Mocha</p>
+                                    <p><span class="text-nixel-purple font-bold">Memory:</span> 342MiB / 16384MiB</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 pt-3 border-t border-nixel-border/50">
+                                <span class="w-3 h-3 rounded-full bg-slate-900"></span>
+                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-nixel-purple"></span>
+                                <span class="w-3 h-3 rounded-full bg-pink-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+                                <span class="w-3 h-3 rounded-full bg-white"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-nixel-border/50">
+            <div id="about" class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold text-nixel-purple uppercase tracking-widest mb-3">Why Choose Nixel</h2>
+                <p class="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">Built for Performance & Ease of Use</p>
+                <p class="text-slate-400 mt-4 text-base">Everything you want from Arch Linux, without the setup headaches.</p>
             </div>
 
-            <a class="btn" href="#">SHA256</a>
-          </div>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Feature 1 -->
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-nixel-purple/10 border border-nixel-purple/30 text-nixel-purple flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="box" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Built on Arch</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        A solid, well-known foundation giving you full access to Arch repositories and the AUR.
+                    </p>
+                </div>
 
+                <!-- Feature 2 -->
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-nixel-purple/10 border border-nixel-purple/30 text-nixel-purple flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Blazing Fast</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Zero bloatware. Boots in seconds with an ultra-light idle RAM footprint under 380MB.
+                    </p>
+                </div>
 
-        <pre><code>sha256sum -c aptos-linux.iso.sha256</code></pre>
-      </div>
-    </section>
+                <!-- Feature 3 -->
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-nixel-purple/10 border border-nixel-purple/30 text-nixel-purple flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="layers" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Bleeding-Edge Rolling</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Always receive the newest software releases and kernels as soon as they drop without re-installing.
+                    </p>
+                </div>
 
-    <section id="get-involved" class="alt">
-      <div class="wrap">
-        <h2>Get involved</h2>
-        <p class="section-intro">
-          Aptos-Linux is young, so help of any kind is welcome: testing, bug reports,
-          documentation, design ideas or code.
-        </p>
+                <!-- Feature 4 -->
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-nixel-purple/10 border border-nixel-purple/30 text-nixel-purple flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="smile" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Beginner Friendly</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Pre-configured environment with graphical installers and guided setups—no wiki required to start.
+                    </p>
+                </div>
 
-        <div class="grid">
-          <div class="card">
-            <h3>Source code</h3>
-            <p>Browse the project and open issues on <a href="#">GitHub</a>.</p>
-          </div>
-          <div class="card">
-            <h3>Chat</h3>
-            <p>Talk to the team and other testers on <a href="#">Discord / Matrix</a>.</p>
-          </div>
-          <div class="card">
-            <h3>Documentation</h3>
-            <p>Install guides and how-tos will live in the <a href="#">docs</a>.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+                <!-- Feature 5 -->
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-nixel-purple/10 border border-nixel-purple/30 text-nixel-purple flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Rock-Solid Stability</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Automated Btrfs system snapshots ensure seamless rollbacks if updates ever break a configuration.
+                    </p>
+                </div>
 
-  </main>
+                <!-- Feature 6 -->
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-nixel-purple/10 border border-nixel-purple/30 text-nixel-purple flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="code" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">100% Open Source</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Built completely in the open. Read the code, report issues, and help shape the project.
+                    </p>
+                </div>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <div>© 2026 Aptos-Linux. Not affiliated with Apple Inc. or Arch Linux.</div>
-      <div class="footer-links">
-        <a href="#">GitHub</a>
-        <a href="#">Docs</a>
-        <a href="#">Contact</a>
-      </div>
+            </div>
+        </section>
+
+        <!-- Interactive Web Terminal -->
+        <section id="terminal" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-nixel-border/50">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <div class="lg:col-span-5 space-y-5">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-nixel-purple/10 text-nixel-purple text-xs font-mono">
+                        <i data-lucide="terminal" class="w-3.5 h-3.5"></i> Live Browser Shell
+                    </div>
+                    <h2 class="text-3xl font-display font-bold text-white">Interactive Terminal Emulator</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Test out Nixel's command-line environment directly in your browser. Click quick commands or type your own commands below.
+                    </p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <p class="text-xs font-mono text-slate-400 uppercase tracking-wider">Quick Commands:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="runTerminalCmd('neofetch')" class="px-3 py-1.5 rounded-lg bg-nixel-card border border-nixel-border text-xs font-mono text-slate-300 hover:border-nixel-purple hover:text-white transition-all">
+                                neofetch
+                            </button>
+                            <button onclick="runTerminalCmd('sudo pacman -Syu')" class="px-3 py-1.5 rounded-lg bg-nixel-card border border-nixel-border text-xs font-mono text-slate-300 hover:border-nixel-purple hover:text-white transition-all">
+                                sudo pacman -Syu
+                            </button>
+                            <button onclick="runTerminalCmd('nixel-info')" class="px-3 py-1.5 rounded-lg bg-nixel-card border border-nixel-border text-xs font-mono text-slate-300 hover:border-nixel-purple hover:text-white transition-all">
+                                nixel-info
+                            </button>
+                            <button onclick="runTerminalCmd('help')" class="px-3 py-1.5 rounded-lg bg-nixel-card border border-nixel-border text-xs font-mono text-slate-300 hover:border-nixel-purple hover:text-white transition-all">
+                                help
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Terminal Window -->
+                <div class="lg:col-span-7">
+                    <div class="rounded-2xl bg-[#090a0f] border border-nixel-border shadow-2xl overflow-hidden font-mono text-xs sm:text-sm">
+                        <!-- Top Bar -->
+                        <div class="bg-[#12131c] px-4 py-3 border-b border-nixel-border flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                            </div>
+                            <span class="text-xs text-slate-400">zsh - Nixel Interactive Terminal</span>
+                            <button onclick="clearTerminal()" class="text-xs text-slate-400 hover:text-nixel-purple transition-colors">Clear</button>
+                        </div>
+
+                        <!-- Terminal Screen -->
+                        <div id="terminalScreen" class="p-5 h-[320px] overflow-y-auto space-y-3 text-slate-300 scroll-smooth">
+                            <div>
+                                <p class="text-nixel-purple font-semibold">Welcome to Nixel OS Web Terminal v2026.04</p>
+                                <p class="text-slate-500">Type <span class="text-white">`help`</span> or click quick buttons to get started.</p>
+                            </div>
+                        </div>
+
+                        <!-- Form Input -->
+                        <form id="terminalForm" onsubmit="handleTerminalSubmit(event)" class="px-5 py-3 bg-[#0d0e14] border-t border-nixel-border/60 flex items-center gap-2">
+                            <span class="text-nixel-purple font-bold">nixel@live:~$</span>
+                            <input type="text" id="terminalInput" autocomplete="off" class="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm" placeholder="Type a command...">
+                            <button type="submit" class="text-slate-400 hover:text-nixel-purple">
+                                <i data-lucide="corner-down-left" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-nixel-border/50">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold text-nixel-purple uppercase tracking-widest mb-3">Download Center</h2>
+                <p class="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">Get Nixel Linux ISO</p>
+                <p class="text-slate-400 mt-4 text-base">Select the desktop ISO or the lightweight CLI installer image.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <!-- Desktop ISO Card -->
+                <div class="rounded-2xl bg-nixel-card border border-nixel-purple/40 p-8 flex flex-col justify-between relative overflow-hidden glow-box">
+                    <div class="absolute top-0 right-0 bg-nixel-purple text-white text-[10px] font-bold uppercase tracking-wider px-4 py-1 rounded-bl-xl">
+                        Recommended
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-3 rounded-xl bg-nixel-purple/10 text-nixel-purple">
+                                <i data-lucide="monitor" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Nixel Desktop ISO</h3>
+                                <p class="text-xs text-slate-400 font-mono">v2026.04 • 64-bit Architecture</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Pre-configured desktop experience with Calamares graphical installer, Wayland compositor, and ready-to-use user environment.
+                        </p>
+
+                        <div class="space-y-2 text-xs font-mono text-slate-400 bg-nixel-bg/60 p-4 rounded-xl border border-nixel-border mb-6">
+                            <div class="flex justify-between"><span>File Size:</span> <span class="text-white">2.4 GB</span></div>
+                            <div class="flex justify-between"><span>Installer:</span> <span class="text-white">Calamares GUI</span></div>
+                            <div class="flex justify-between"><span>Kernel:</span> <span class="text-white">Linux 6.12 LTS</span></div>
+                        </div>
+
+                        <!-- Checksum -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-mono text-slate-400 mb-1">SHA256 Checksum:</label>
+                            <div class="flex items-center gap-2 bg-[#0c0d12] p-2.5 rounded-lg border border-nixel-border text-xs font-mono text-slate-300">
+                                <span class="truncate flex-1">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+                                <button onclick="copyHash('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')" class="p-1.5 hover:bg-nixel-border rounded text-nixel-purple transition-colors" title="Copy Checksum">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="#" onclick="triggerDownload(event, 'Nixel Desktop ISO')" class="flex-1 py-3 px-4 rounded-xl bg-nixel-purple hover:bg-nixel-purpleDark text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-nixel-purple/20 transition-all">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            Direct Download
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Minimal ISO Card -->
+                <div class="rounded-2xl bg-nixel-card border border-nixel-border p-8 flex flex-col justify-between relative">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-3 rounded-xl bg-slate-800 text-slate-300">
+                                <i data-lucide="terminal" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Nixel Minimal ISO</h3>
+                                <p class="text-xs text-slate-400 font-mono">v2026.04 • CLI Only</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Barebones CLI image for custom installations, headless servers, or users building custom desktop environments.
+                        </p>
+
+                        <div class="space-y-2 text-xs font-mono text-slate-400 bg-nixel-bg/60 p-4 rounded-xl border border-nixel-border mb-6">
+                            <div class="flex justify-between"><span>File Size:</span> <span class="text-white">850 MB</span></div>
+                            <div class="flex justify-between"><span>Installer:</span> <span class="text-white">CLI Installer</span></div>
+                            <div class="flex justify-between"><span>Kernel:</span> <span class="text-white">Linux 6.12 LTS</span></div>
+                        </div>
+
+                        <!-- Checksum -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-mono text-slate-400 mb-1">SHA256 Checksum:</label>
+                            <div class="flex items-center gap-2 bg-[#0c0d12] p-2.5 rounded-lg border border-nixel-border text-xs font-mono text-slate-300">
+                                <span class="truncate flex-1">7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284ddd200126d9069b</span>
+                                <button onclick="copyHash('7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284ddd200126d9069b')" class="p-1.5 hover:bg-nixel-border rounded text-nixel-purple transition-colors" title="Copy Checksum">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="#" onclick="triggerDownload(event, 'Nixel Minimal ISO')" class="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            Direct Download
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Verification Terminal Help -->
+            <div class="mt-12 max-w-5xl mx-auto">
+                <p class="text-xs font-mono text-slate-400 mb-2">Verify ISO image integrity in your terminal:</p>
+                <div class="bg-nixel-card border border-nixel-border rounded-xl p-4 font-mono text-xs text-slate-300 flex items-center justify-between">
+                    <code>sha256sum -c nixel-linux-2026.04-x86_64.iso.sha256</code>
+                    <button onclick="copyHash('sha256sum -c nixel-linux-2026.04-x86_64.iso.sha256')" class="text-nixel-purple hover:underline text-xs">Copy Command</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Involved / Community -->
+        <section id="get-involved" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-nixel-border/50">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold text-nixel-purple uppercase tracking-widest mb-3">Community</h2>
+                <p class="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">Get Involved</p>
+                <p class="text-slate-400 mt-4 text-base">Nixel Linux is open-source. Help us test, write docs, or contribute code.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all">
+                    <h3 class="text-lg font-bold text-white mb-2">Source Code</h3>
+                    <p class="text-slate-400 text-xs mb-4">Inspect our ISO build scripts and core configuration files.</p>
+                    <a href="https://github.com" target="_blank" class="text-xs text-nixel-purple font-semibold hover:underline flex items-center gap-1">
+                        Visit GitHub <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all">
+                    <h3 class="text-lg font-bold text-white mb-2">Community Chat</h3>
+                    <p class="text-slate-400 text-xs mb-4">Join our Discord server and Matrix room for support and developer chat.</p>
+                    <a href="#" class="text-xs text-nixel-purple font-semibold hover:underline flex items-center gap-1">
+                        Join Discord / Matrix <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-nixel-card border border-nixel-border hover:border-nixel-purple/50 transition-all">
+                    <h3 class="text-lg font-bold text-white mb-2">Documentation</h3>
+                    <p class="text-slate-400 text-xs mb-4">Read installation guides, post-install tweaks, and Wiki pages.</p>
+                    <a href="#" class="text-xs text-nixel-purple font-semibold hover:underline flex items-center gap-1">
+                        Read Docs <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-nixel-card border border-nixel-purple text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 font-mono text-xs">
+        <i data-lucide="check-circle" class="w-5 h-5 text-nixel-purple"></i>
+        <span id="toastMsg">Action completed!</span>
     </div>
-  </footer>
 
+    <!-- Footer -->
+    <footer class="bg-[#050507] border-t border-nixel-border/60 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="font-display font-bold text-sm text-white">Nixel Linux</span>
+                    <span>&copy; 2026. Not affiliated with Arch Linux or Apple Inc.</span>
+                </div>
+                <div class="flex items-center gap-6 text-slate-400">
+                    <a href="https://github.com" class="hover:text-nixel-purple transition-colors">GitHub</a>
+                    <a href="#" class="hover:text-nixel-purple transition-colors">Docs</a>
+                    <a href="#" class="hover:text-nixel-purple transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        lucide.createIcons();
+
+        // Mobile Nav Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+        });
+
+        // Copy Checksum Function
+        function copyHash(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            showToast('Copied to clipboard!');
+        }
+
+        // Trigger ISO Download
+        function triggerDownload(e, isoName) {
+            e.preventDefault();
+            showToast(`Starting download: ${isoName}`);
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Terminal Emulator Script
+        const terminalScreen = document.getElementById('terminalScreen');
+        const terminalInput = document.getElementById('terminalInput');
+
+        function appendTerminalOutput(cmd, outputHtml) {
+            const line = document.createElement('div');
+            line.className = 'space-y-1';
+            line.innerHTML = `
+                <div class="flex items-center gap-2 text-slate-400">
+                    <span class="text-nixel-purple font-bold">nixel@live:~$</span> <span>${escapeHtml(cmd)}</span>
+                </div>
+                <div class="pl-4 text-slate-300">${outputHtml}</div>
+            `;
+            terminalScreen.appendChild(line);
+            terminalScreen.scrollTop = terminalScreen.scrollHeight;
+        }
+
+        function escapeHtml(string) {
+            return String(string).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function clearTerminal() {
+            terminalScreen.innerHTML = `
+                <div>
+                    <p class="text-nixel-purple font-semibold">Welcome to Nixel OS Web Terminal v2026.04</p>
+                    <p class="text-slate-500">Type <span class="text-white">\`help\`</span> or click quick buttons to get started.</p>
+                </div>
+            `;
+        }
+
+        function runTerminalCmd(cmd) {
+            terminalInput.value = cmd;
+            executeCommand(cmd);
+            terminalInput.value = '';
+        }
+
+        function handleTerminalSubmit(e) {
+            e.preventDefault();
+            const cmd = terminalInput.value.trim();
+            if (!cmd) return;
+            executeCommand(cmd);
+            terminalInput.value = '';
+        }
+
+        function executeCommand(cmd) {
+            const lowerCmd = cmd.toLowerCase().trim();
+
+            if (lowerCmd === 'clear') {
+                clearTerminal();
+                return;
+            }
+
+            let output = '';
+
+            switch (lowerCmd) {
+                case 'neofetch':
+                case 'fastfetch':
+                    output = `
+                        <div class="text-nixel-purple font-bold">
+                            OS: Nixel Linux x86_64<br>
+                            Kernel: 6.12.8-arch1-1-nixel<br>
+                            Uptime: 2 hours, 14 mins<br>
+                            Packages: 612 (pacman)<br>
+                            Shell: zsh 5.9<br>
+                            Theme: Catppuccin Mocha<br>
+                            RAM: 342MiB / 16384MiB
+                        </div>
+                    `;
+                    break;
+                case 'sudo pacman -syu':
+                    output = `
+                        <p class="text-emerald-400">:: Synchronizing package databases...</p>
+                        <p class="text-slate-400"> core is up to date</p>
+                        <p class="text-slate-400"> extra is up to date</p>
+                        <p class="text-slate-400"> nixel-repo is up to date</p>
+                        <p class="text-emerald-400">:: Starting full system upgrade...</p>
+                        <p class="text-white">there is nothing to do (system updated)</p>
+                    `;
+                    break;
+                case 'nixel-info':
+                    output = `
+                        <p class="text-nixel-purple font-semibold">Nixel Linux 2026.04 (Rolling Release)</p>
+                        <p>Architecture: Arch-based Minimalist Core</p>
+                        <p>Installer: Calamares GUI & Custom CLI</p>
+                        <p>Default File System: Btrfs (With Snapper backups)</p>
+                    `;
+                    break;
+                case 'help':
+                    output = `
+                        <p class="text-white">Available Commands:</p>
+                        <p>• <span class="text-nixel-purple">neofetch</span> - Display system information</p>
+                        <p>• <span class="text-nixel-purple">sudo pacman -Syu</span> - Update system packages</p>
+                        <p>• <span class="text-nixel-purple">nixel-info</span> - View Nixel distribution specs</p>
+                        <p>• <span class="text-nixel-purple">clear</span> - Clear terminal output</p>
+                    `;
+                    break;
+                default:
+                    output = `<p class="text-rose-400">zsh: command not found: ${escapeHtml(cmd)}. Type <span class="text-white">'help'</span> for a list of commands.</p>`;
+            }
+
+            appendTerminalOutput(cmd, output);
+        }
+    </script>
 </body>
-</html>
+                          </html>
