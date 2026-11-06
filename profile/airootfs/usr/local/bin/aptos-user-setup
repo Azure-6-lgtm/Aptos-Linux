@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eu
+
+if ! id aptos &>/dev/null; then
+    useradd --create-home --user-group --shell /bin/bash --groups wheel aptos
+fi
+
+usermod -aG wheel aptos
+
+install -d -o aptos -g aptos /home/aptos
